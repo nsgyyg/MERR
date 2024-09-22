@@ -96,8 +96,6 @@ class TrainingInstance(object):
   def __repr__(self):
     return self.__str__()
 
-#用于将实例训练写入TFRecord文件，以便后续训练时能够快速读取数据。
-#该函数将实例训练转换为TFRecord格式，并写入一个或多个输出文件中
 def write_instance_to_example_files(instances, tokenizer, max_seq_length,
                                     max_predictions_per_seq, output_files):
   """Create TF example files from `TrainingInstance`s."""
@@ -180,7 +178,6 @@ def create_float_feature(values):
   feature = tf.train.Feature(float_list=tf.train.FloatList(value=list(values)))
   return feature
 
-#从原始文本中创建一系列训练实例，其中每个实例包括两个部分，其中一个为原始文本，另一个为随机选择的文本
 def create_training_instances(input_files, tokenizer, max_seq_length,
                               dupe_factor, short_seq_prob, masked_lm_prob,
                               max_predictions_per_seq, rng):
@@ -618,7 +615,6 @@ def create_instances_from_document(
 MaskedLmInstance = collections.namedtuple("MaskedLmInstance",
                                           ["index", "label"])
 
-#用于创建masked LM任务的预测，即对输入文本中的一些词进行mask，并尝试预测mask的词
 def create_masked_lm_predictions(tokens, masked_lm_prob,
                                  max_predictions_per_seq, vocab_words, rng):
   """Creates the predictions for the masked LM objective."""
